@@ -22,12 +22,20 @@ new Chart(document.getElementById("lineChart"), {
   type: 'line',
   data: {
     labels: {{ dates | safe }},
-    datasets: [{ 
+    datasets: [
+      { 
         data: {{ deaths }},
         label: "Deaths",
         borderColor: "#3e95cd",
         fill: false
       },  
+      {
+        data: {{ deaths7d }},
+        label: "Deaths 7day Rolling Avg",
+        borderColor: "red",
+        fill: false
+      },
+
     ]
   },
   options: {
@@ -49,10 +57,17 @@ new Chart(document.getElementById("lineChart-2"), {
   type: 'line',
   data: {
     labels: {{ dates | safe }},
-    datasets: [{
+    datasets: [
+      {
         data: {{ cases }},
         label: "Cases",
         borderColor: "#3e95cd",
+        fill: false
+      },
+      {
+        data: {{ cases7d }},
+        label: "Cases 7day Rolling Avg",
+        borderColor: "red",
         fill: false
       },
     ]
