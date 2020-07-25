@@ -33,8 +33,12 @@ cases = '[' + cases + ']'
 dates =  ','.join(DATA['dates']) 
 dates = '[' + dates + ']'
 
+total_cases = "{:,}".format(int(total_cases))
+total_deaths = "{:,}".format(int(total_deaths))
+
+
 with app.app_context():
-  data = render_template("covid_chart1.html",deaths=deaths,dates=dates,cases=cases)
+  data = render_template("covid_chart1.html",deaths=deaths,dates=dates,cases=cases,totalcases=total_cases,totaldeaths=total_deaths)
 
 
 print(data)
