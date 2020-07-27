@@ -1,8 +1,10 @@
 #!/home/vengle/Projects/covid19/bin/python3
 from flask import Flask, render_template
 from App import app
-import sys
+import sys,time,datetime
 import json
+from Tools import Files
+
 
 
 def GenCharts():
@@ -47,10 +49,19 @@ def GenCharts():
     deaths7d =   ','.join(DATA['deaths7d'])
     deaths7d =   '[' + deaths7d + ']'
 
+    now = str(time.strftime('%X %x %Z'))
+ 
+    #f = Files()
+    #f.read_file('/var/www/html/updater.log')
+ 
+    #log = ''
+    #for line in reversed(f.data):
+    #    log += line + "\n"    
 
     with app.app_context():
         data = render_template("covid_chart1.html",deaths=deaths,dates=dates,cases=cases,
-                                 totalcases=total_cases,totaldeaths=total_deaths,cases7d=cases7d,deaths7d=deaths7d)
+                                 totalcases=total_cases,totaldeaths=total_deaths,cases7d=cases7d,
+                                 deaths7d=deaths7d,now=now)
     print(data)
 
 def compute7d(arraydata):
