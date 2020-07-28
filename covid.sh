@@ -10,4 +10,6 @@ echo "`date` - Updating Charts"
 cd /home/vengle/Projects/covid19/App
 ./covid.py > /var/www/html/covid.html
 echo "`date` - Update Complete."
+cat /var/www/html/updater.log |tail -100 >/tmp/covidlog
+cat /tmp/covidlog > /var/www/html/updater.log 
 ./logpage.py >  /var/www/html/covid_logview.html
