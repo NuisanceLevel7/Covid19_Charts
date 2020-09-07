@@ -1,10 +1,13 @@
 #!/bin/bash
 
-
 echo "`date` - Updating cofid data repo"
+rm -r /home/vengle/Projects/covid19/ourworld/covid-19-data/public/data/*
+
 cd /home/vengle/Projects/covid19/ourworld/covid-19-data/public/data/
-git status
-git pull
+wget https://github.com/owid/covid-19-data/raw/master/public/data/owid-covid-data.json
+
+cd /home/vengle/Projects/covid19/App
+./covid.py > /var/www/html/covid.html
 
 echo "`date` - Updating Charts"
 cd /home/vengle/Projects/covid19/App
