@@ -19,11 +19,17 @@ def GenCharts():
     DATA['cases'] = list()
     DATA['cases7d'] = list()
     for dataset in covid_data['USA']['data']:
-        deaths = str(dataset["new_deaths"])
+        deaths = "0"
+        cases = "0"
+        if "new_deaths" in dataset:
+            deaths = str(dataset["new_deaths"])
         date =  dataset["date"]
-        cases = str(dataset["new_cases"])
-        total_cases = dataset["total_cases"]
-        total_deaths = dataset["total_deaths"]
+        if "new_cases" in dataset:
+            cases = str(dataset["new_cases"])
+        if "total_cases" in dataset:
+            total_cases = dataset["total_cases"]
+        if "total_deaths" in dataset:
+            total_deaths = dataset["total_deaths"]
         DATA['deaths'].append(deaths)
         DATA['cases'].append(cases)
         DATA['dates'].append('"' + date + '"')
