@@ -5,6 +5,7 @@ rm -r /home/vengle/Projects/covid19/ourworld/covid-19-data/public/data/*
 
 cd /home/vengle/Projects/covid19/ourworld/covid-19-data/public/data/
 wget https://github.com/owid/covid-19-data/raw/master/public/data/owid-covid-data.json
+wget https://api.covidtracking.com/v1/us/current.json
 
 
 echo "`date` - Updating Charts"

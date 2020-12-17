@@ -40,8 +40,13 @@
 <tr>
 <th>Total Cases
 <th>Total Deaths
+<th>Total Hospitalized
+<th>On Ventilator
+<th>Daily Cases
+<th>Daily Deaths
 <tr>
-<td>{{ totalcases }}<td>{{ totaldeaths }}
+<td>{{ totalcases }}<td>{{ totaldeaths }}<td>{{ totalhospitalized }}
+<td>{{ totalvent }}<td>{{ dailycases }}<td>{{ dailydeaths }}
 </table>
 <br><br>
 <div style="clear:both;"></div>
@@ -117,6 +122,35 @@ new Chart(document.getElementById("lineChart-2"), {
 </script>
 </table>
 </div>
+<div class="row">
+<table width=600px><tr><td>
+<canvas id="lineChart-3"  width="600" height="450"  style="border:4px solid #3432a8;"></canvas>
+<script>
+new Chart(document.getElementById("lineChart-3"), {
+  type: 'line',
+  data: {
+    labels: {{ dates | safe }},
+    datasets: [
+      {
+        data: {{ hospitalized }},
+        label: "Hospitalized",
+        borderColor: "#3e95cd",
+        fill: false
+      }
+    ]
+  },
+  options: {
+    responsive: false,
+    title: {
+      display: true,
+      text: 'COVID-19 US Hospitalized'
+    }
+  }
+});
+</script>
+</table>
+</div>
+
 </div>
 
 
