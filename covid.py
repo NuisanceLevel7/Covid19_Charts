@@ -16,6 +16,12 @@ def GenCharts():
     with open(current) as json_file:
         current_data = json.load(json_file)
 
+    vaccines = '/home/vengle/Projects/covid19/ourworld/covid-19-data/public/data/total_vaccines.txt'
+    with open(vaccines) as f:
+        covid_vaccines = f.readlines()
+    total_vaccines = covid_vaccines[0].strip()
+
+
     hospitalized_curr = current_data[0]['hospitalizedCurrently']
     onVentilatorCurrently = current_data[0]['onVentilatorCurrently']
     last = 0
@@ -51,8 +57,10 @@ def GenCharts():
         DATA['cases'].append(cases)
         DATA['hospitalized'].append(hospitalized)
         DATA['dates'].append('"' + date + '"')
-        dailycases = cases
-        dailydeaths = deaths
+        if cases != '0':
+            dailycases = cases
+        if deaths != "0":
+            dailydeaths = deaths
 
     del DATA['hospitalized'][-1]
     DATA['hospitalized'].append(str(hospitalized_curr))
@@ -74,6 +82,7 @@ def GenCharts():
     totalvent = "{:,}".format(int(onVentilatorCurrently))
     dailycases = "{:,}".format(int(float(dailycases)))
     dailydeaths = "{:,}".format(int(float(dailydeaths)))
+    vaccines = "{:,}".format(int(total_vaccines))
 
     DATA['cases7d'] = compute7d(DATA['cases'])
     cases7d =   ','.join(DATA['cases7d'])
@@ -97,7 +106,8 @@ def GenCharts():
                                  totalcases=total_cases,totaldeaths=total_deaths,cases7d=cases7d,
                                  deaths7d=deaths7d,hospitalized=hospitalized,
                                  totalhospitalized=totalhospitalized,totalvent=totalvent,
-                                 dailycases=dailycases,dailydeaths=dailydeaths,now=now)
+                                 dailycases=dailycases,dailydeaths=dailydeaths,now=now,vaccines=vaccines)
+    #print(dailydeaths,dailycases)
     print(data)
 
 def compute7d(arraydata):
